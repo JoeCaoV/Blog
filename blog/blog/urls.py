@@ -16,9 +16,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-handler500 = 'website.views.handler500'
-handler404 = 'website.views.handler404'
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('website.urls')),
