@@ -37,9 +37,6 @@
           <div class="col-md-6"><a href="{% url 'connection' %}">CONNEXION</a></div>
           <div class="col-md-6"><a href="{% url 'registration' %}">INSCRIPTION</div>
       {% endif %}
-      {% if user.is_superuser %}
-         <div class="col-md-12"><a href="{% url 'add_project' %}">Ajouter un projet</a></div>
-      {% endif %}
     </div>
     <a class="navbar-brand js-scroll-trigger" href="#page-top">
       <span class="d-block d-lg-none"></span>
@@ -55,6 +52,11 @@
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="{% url 'home' %}">Accueil</a>
         </li>
+      {% for project in projects %}
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="{% url 'home' %}">Projet {{ project.number }}</a>
+        </li>
+      {% endfor %}
       </ul>
     </div>
   </nav>
