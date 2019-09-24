@@ -7,6 +7,9 @@ def home(request):
     """Home Page"""
     return render(request, 'pages/index.html')
 
+def add_project(request):
+    """Page to create a new project"""
+    return render(request, 'pages/index.html')
 def project(request):
     """request page"""
     return render(request, 'pages/index.html')

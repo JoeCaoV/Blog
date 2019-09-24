@@ -19,6 +19,7 @@
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
 
   <!-- Custom styles for this template -->
+  <link href="{% static 'website/css/main.css' %} " rel="stylesheet">
   <link href="{% static 'website/css/resume.min.css' %} " rel="stylesheet">
 
 </head>
@@ -28,8 +29,20 @@
 <body id="page-top">
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+    <div id="log-menu" class="row">
+      {% if user.is_authenticated %}
+          <div class="col-md-6"><h5>{{user.username}}</h5></div>
+          <div class="col-md-6"><a href="{% url 'logout'%}">Deconnexion</a></div>
+      {% else %}
+          <div class="col-md-6"><a href="{% url 'connection' %}">CONNEXION</a></div>
+          <div class="col-md-6"><a href="{% url 'registration' %}">INSCRIPTION</div>
+      {% endif %}
+      {% if user.is_superuser %}
+         <div class="col-md-12"><a href="{% url 'add_project' %}">Ajouter un projet</a></div>
+      {% endif %}
+    </div>
     <a class="navbar-brand js-scroll-trigger" href="#page-top">
-      <span class="d-block d-lg-none">Clarence Taylor</span>
+      <span class="d-block d-lg-none"></span>
       <span class="d-none d-lg-block">
         <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="{% static 'website/img/0.jpg' %}" alt="">
       </span>
