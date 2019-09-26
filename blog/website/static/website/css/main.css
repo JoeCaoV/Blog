@@ -3,3 +3,35 @@
     font-weight: bold;
     color: white;
 }
+
+.project-section{
+    margin-left:25px;
+    padding-top:25px;
+    width:90%;
+}
+
+#comment-section{
+    margin-left:100px;
+    padding-top:25px;
+    text-align:center;
+}
+
+.comment-text{
+    width:60%;
+    min-height: 30px;
+    background-color: rgb(253, 249, 244);
+    margin-bottom: 0%;
+    margin:auto;
+}
+
+.comment-detail{
+    width:60%;
+    background-color: aliceblue;
+    margin:auto;
+}
+
+.add-commentaire textarea{
+    width:60%;
+    height: 150px;
+    margin-bottom: 15px;
+}

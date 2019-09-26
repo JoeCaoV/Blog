@@ -54,7 +54,7 @@
         </li>
       {% for project in projects %}
         <li class="nav-item">
-          <a class="nav-link js-scroll-trigger" href="{% url 'home' %}">Projet {{ project.number }}</a>
+          <a class="nav-link js-scroll-trigger" href="{% url 'project' project_number=project.number %}">Projet {{ project.number }}</a>
         </li>
       {% endfor %}
       </ul>

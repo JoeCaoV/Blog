@@ -2,6 +2,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import authenticate, login, logout
+from .forms import CommentForm
+from .models import Project
 
 def home(request):
     """Home Page"""
@@ -10,9 +12,26 @@ def home(request):
 def add_project(request):
     """Page to create a new project"""
     return render(request, 'pages/index.html')
-def project(request):
-    """request page"""
-    return render(request, 'pages/index.html')
+
+def project(request, project_number):
+    """Page that display the project"""
+    number = project_number
+    form = CommentForm
+    try:
+        project = Project.objects.get(number=number)
+        if request.method == 'POST':
+            form = CommentForm(request.POST)
+            print(form)
+            if form.is_valid():
+                comment = form.save(commit=False)
+                comment.project = project
+                comment.user = request.user
+                comment.save()
+        form = CommentForm
+        context = {'project' : project, 'form' : form }
+    except Project.DoesNotExist:
+        context = {'error' : 'go fck yourself'}
+    return render(request, 'pages/project.html', context)
 
 def registration(request):
     """Page to create an account"""

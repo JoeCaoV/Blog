@@ -1,0 +1,38 @@
+{% extends 'layout/base.html' %}
+
+{% block body %}
+  {% if error %}
+    <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="about">
+        <div class="w-100">
+        <h1 class="mb-0">
+            <span class="text-primary">ERREUR !</span>
+        </h1>
+        <div class="subheading mb-5">Article introuvable</div>
+        </div>
+    </section>
+  {% else %} 
+    <section class="project-section">
+      <h1 class="mb-0">Projet <span class="text-primary">{{ project.number }}</span></h1>
+      <div class="subheading mb-10">{{ project.title }}</div>
+      <p>
+        {{ project.content | safe }}
+      </p>
+    </section>
+    <section id="comment-section">
+      <div>
+        <h6>Ajouter un commentaire :</h6>
+        <form class="add-commentaire" method='POST' action="{% url 'project' project_number=project.number %}">
+          {% csrf_token %}
+          {{ form.content }}
+          <p><input type='submit' value='Envoyer'></p>
+        </form> 
+      </div>
+      {% for comment in project.comments.all %}
+        <p class="comment-text">{{comment.content}}</p>
+        <p class="comment-detail">Ecrit le {{comment.date}} par {{comment.user}}</p>
+      {% empty %}
+        <p>Aucun commentaire</p>
+      {% endfor %}
+    </section>
+  {% endif %}
+{% endblock %}
