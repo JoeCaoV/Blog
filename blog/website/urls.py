@@ -9,4 +9,6 @@ urlpatterns = [
     path('logout', views.disconnect, name='logout'),
     path('add-project', views.add_project, name='add_project'),
     path('project/<int:project_number>', views.project, name='project'),
+    path('mentions', views.mentions, name='mentions'),
+    path('contact', views.contact, name='contact')
 ]

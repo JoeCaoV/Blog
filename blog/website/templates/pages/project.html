@@ -19,14 +19,20 @@
       </p>
     </section>
     <section id="comment-section">
-      <div>
-        <h6>Ajouter un commentaire :</h6>
-        <form class="add-commentaire" method='POST' action="{% url 'project' project_number=project.number %}">
-          {% csrf_token %}
-          {{ form.content }}
-          <p><input type='submit' value='Envoyer'></p>
-        </form> 
-      </div>
+      {% if user.is_authenticated %}
+        <div>
+          <h6>Ajouter un commentaire :</h6>
+          <form class="add-commentaire" method='POST' action="{% url 'project' project_number=project.number %}">
+            {% csrf_token %}
+            {{ form.content }}
+            <p><input type='submit' value='Envoyer'></p>
+          </form> 
+        </div>
+      {% else %}
+        <div>
+          <h4>Vous devez être connecté pour ajouter un commentaire</h4>
+        </div>
+      {% endif %}
       {% for comment in project.comments.all %}
         <p class="comment-text">{{comment.content}}</p>
         <p class="comment-detail">Ecrit le {{comment.date}} par {{comment.user}}</p>

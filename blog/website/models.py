@@ -1,5 +1,5 @@
 from django.db import models
-from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.auth.models import User
 from django.utils.timezone import now
 
@@ -7,7 +7,7 @@ from django.utils.timezone import now
 class Project(models.Model):
     number = models.IntegerField(unique=True)
     title = models.CharField(max_length=155)
-    content = RichTextField()
+    content = RichTextUploadingField()
 
     def __str__(self):
         return self.title

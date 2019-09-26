@@ -21,7 +21,6 @@ def project(request, project_number):
         project = Project.objects.get(number=number)
         if request.method == 'POST':
             form = CommentForm(request.POST)
-            print(form)
             if form.is_valid():
                 comment = form.save(commit=False)
                 comment.project = project
@@ -30,7 +29,7 @@ def project(request, project_number):
         form = CommentForm
         context = {'project' : project, 'form' : form }
     except Project.DoesNotExist:
-        context = {'error' : 'go fck yourself'}
+        context = {'error' : 'Project non existant'}
     return render(request, 'pages/project.html', context)
 
 def registration(request):
@@ -76,3 +75,11 @@ def disconnect(request):
     """page to log out"""
     logout(request)
     return redirect('home')
+
+def mentions(request):
+    """Page to legals mentions"""
+    return render(request, 'pages/mentions.html')
+
+def contact(request):
+    """Page to contact"""
+    return render(request, 'pages/contact.html')
