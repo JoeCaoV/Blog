@@ -44,3 +44,19 @@
 #contact{
    font-size:80px; 
 }
+
+hr {
+	display: block;
+	clear: both;
+    height: 2px;
+    width:80px;
+	margin: auto;
+	padding: 0;
+	border: 0;
+	font-family: arial;
+	text-align: center;
+	font-size: 60px;
+    line-height: 1;
+    border:solid black 1px;
+    background-color:rgb(119, 117, 113);
+}
