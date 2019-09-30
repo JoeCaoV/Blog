@@ -1,5 +1,6 @@
 """Import django module and models"""
 from django.shortcuts import render, redirect
+from django.http import Http404
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from .forms import CommentForm
@@ -29,7 +30,7 @@ def project(request, project_number):
         form = CommentForm
         context = {'project' : project, 'form' : form }
     except Project.DoesNotExist:
-        context = {'error' : 'Project non existant'}
+        raise Http404()
     return render(request, 'pages/project.html', context)
 
 def registration(request):
@@ -83,3 +84,11 @@ def mentions(request):
 def contact(request):
     """Page to contact"""
     return render(request, 'pages/contact.html')
+
+def handler404(request, exception):
+    """Error page 404"""
+    return render(request, 'errors/error404.html', status=404)
+
+def handler500(request):
+    """Error page 500"""
+    return render(request, 'errors/error500.html')
