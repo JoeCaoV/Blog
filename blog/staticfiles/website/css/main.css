@@ -10,11 +10,6 @@
     width:90%;
 }
 
-#comment-section{
-    padding-top:25px;
-    text-align:center;
-}
-
 .comment-text{
     width:60%;
     min-height: 30px;
@@ -58,4 +53,8 @@ hr {
     line-height: 1;
     border:solid black 1px;
     background-color:rgb(119, 117, 113);
+}
+
+.project-section img{
+    max-width: 80%;
 }

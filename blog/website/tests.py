@@ -1,6 +1,7 @@
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.test import RequestFactory, TestCase, Client
-from website.models import Project
+from website.models import Project, Comment
 
 # Create your tests here.
 
@@ -12,7 +13,6 @@ class TestViews(TestCase):
         user.set_password('motdepasse')
         user.save()
         self.client = Client()
-        self.client.login(username='tester', password='motdepasse')
 
         for number in range(3):
             project = Project.objects.create(number=number,
@@ -30,8 +30,20 @@ class TestViews(TestCase):
         """Testing if the views for a non existing project return a 404"""
         response = self.client.get('/project/5').status_code
         self.assertEqual(404, response)
+
+    def test_inscription(self):
+        """testing a registration"""
+        data = {'username':'testeur', 'password1':'adefze', 'password2':'adefze'}
+        response = self.client.post('/registration', data)
+        self.assertEqual(200, response.status_code)
+        form = UserCreationForm(data)
+        self.assertTrue(form.is_valid)
     
     def test_add_comment(self):
         """Testing to add a comment"""
+        self.client.login(username='tester', password='motdepasse')
         response = self.client.post('/project/1', {'content':'Hello there'})
-        self.assetEqual=(200, response.status_code)
+        self.assertEqual(200, response.status_code)
+        comment = Comment.objects.get(pk=1)
+        self.assertEqual('Hello there', comment.content)
+
