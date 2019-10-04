@@ -52,13 +52,13 @@
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="{% url 'home' %}">Accueil</a>
         </li>
-        <hr class="nav-link js-scroll-trigger">
+        <hr class="js-scroll-trigger">
       {% for project in projects %}
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="{% url 'project' project_number=project.number %}">Projet {{ project.number }}</a>
         </li>
       {% endfor %}
-        <hr class="nav-link js-scroll-trigger">
+        <hr class="js-scroll-trigger">
         <li class="nav-item">
           <a class="nav-link js-scroll-trigger" href="{% url 'mentions' %}">Mentions</a>
         </li>
