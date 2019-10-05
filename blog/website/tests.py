@@ -39,7 +39,7 @@ class TestViews(TestCase):
         form = UserCreationForm(data)
         self.assertTrue(form.is_valid)
     
-    def test_add_comment(self):
+    def test_comment(self):
         """Testing to add a comment"""
         self.client.login(username='tester', password='motdepasse')
         response = self.client.post('/project/1', {'content':'Hello there'})
@@ -47,3 +47,6 @@ class TestViews(TestCase):
         comment = Comment.objects.get(pk=1)
         self.assertEqual('Hello there', comment.content)
 
+        """Testing now to delete the comment just born, yeah I'm cruel"""
+        self.client.post('/delete-comment', {'comment_id' : 1})
+        self.assertRaises(Comment.DoesNotExist, Comment.objects.get, id=1)

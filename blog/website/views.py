@@ -1,10 +1,10 @@
 """Import django module and models"""
 from django.shortcuts import render, redirect
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from .forms import CommentForm
-from .models import Project
+from .models import Project, Comment
 
 def home(request):
     """Home Page"""
@@ -49,6 +49,16 @@ def registration(request):
         form = UserCreationForm()
     context = {'form' : form}
     return render(request, 'pages/registration.html', context)
+
+def deleteComment(request):
+    """Page process to delete a comment"""
+    if request.method == 'POST':
+        comment = Comment.objects.get(pk=request.POST['comment_id'])
+        if comment.user == request.user:
+            comment.delete()
+            return HttpResponse('Comment deleted')
+    return HttpResponse('Error')
+        
 
 def connection(request):
     """page to log in"""

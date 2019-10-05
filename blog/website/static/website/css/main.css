@@ -25,6 +25,13 @@
     margin:auto;
 }
 
+.comment-command{
+    width:60%;
+    margin:auto;
+    background-attachment: aliceblue;
+    border-top: solid 1px black;
+}
+
 .add-commentaire textarea{
     width:60%;
     height: 150px;
