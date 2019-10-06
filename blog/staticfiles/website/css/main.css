@@ -10,10 +10,14 @@
     width:90%;
 }
 
+.project-section p img{
+    display:block;
+    margin:auto;
+}
+
 .comment-text{
     width:60%;
     min-height: 30px;
-    background-color: rgb(253, 249, 244);
     margin-bottom: 0%;
     margin:auto;
     margin-top:18px;
@@ -21,14 +25,23 @@
 
 .comment-detail{
     width:60%;
-    background-color: aliceblue;
+    color:white;
+    background-color: #bd5d38;
     margin:auto;
+}
+
+.comment-command{
+    width:60%;
+    margin:auto;
+    background-attachment: aliceblue;
+    border-top: solid 1px black;
 }
 
 .add-commentaire textarea{
     width:60%;
     height: 150px;
     margin-bottom: 15px;
+    text-align:center;
 }
 
 .masthead{
@@ -57,4 +70,8 @@ hr {
 
 .project-section img{
     max-width: 80%;
+}
+
+#comment-section{
+    text-align:center;
 }
