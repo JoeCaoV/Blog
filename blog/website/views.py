@@ -10,9 +10,23 @@ def home(request):
     """Home Page"""
     return render(request, 'pages/index.html')
 
-def add_project(request):
+def addProject(request):
     """Page to create a new project"""
     return render(request, 'pages/index.html')
+
+def addComment(request):
+    """Page process to add a comment"""
+    if request.method == 'POST':
+        form = request.POST
+        project = Project.objects.get(number=form['number'])
+        comment = Comment.objects.create(user=request.user,
+                               content=form['content'],
+                               project=project)
+        try:
+            return redirect('project', project_number=project.number)
+        except:
+            return redirect('home')
+    return redirect('home')
 
 def project(request, project_number):
     """Page that display the project"""
@@ -20,13 +34,6 @@ def project(request, project_number):
     form = CommentForm
     try:
         project = Project.objects.get(number=number)
-        if request.method == 'POST':
-            form = CommentForm(request.POST)
-            if form.is_valid():
-                comment = form.save(commit=False)
-                comment.project = project
-                comment.user = request.user
-                comment.save()
         form = CommentForm
         context = {'project' : project, 'form' : form }
     except Project.DoesNotExist:

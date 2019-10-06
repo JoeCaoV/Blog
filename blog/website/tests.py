@@ -42,8 +42,7 @@ class TestViews(TestCase):
     def test_comment(self):
         """Testing to add a comment"""
         self.client.login(username='tester', password='motdepasse')
-        response = self.client.post('/project/1', {'content':'Hello there'})
-        self.assertEqual(200, response.status_code)
+        response = self.client.post('/add-comment', {'content':'Hello there', 'number':1})
         comment = Comment.objects.get(pk=1)
         self.assertEqual('Hello there', comment.content)
 

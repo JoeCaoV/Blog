@@ -22,9 +22,10 @@
       {% if user.is_authenticated %}
         <div>
           <h6>Ajouter un commentaire :</h6>
-          <form class="add-commentaire" method='POST' action="{% url 'project' project_number=project.number %}">
+          <form class="add-commentaire" method='POST' action="{% url 'add_comment' %}">
             {% csrf_token %}
             {{ form.content }}
+            <input type="hidden" value='{{ project.number }}' name='number'>
             <p><input type='submit' value='Envoyer'></p>
           </form> 
         </div>
